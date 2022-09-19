@@ -1,0 +1,14 @@
+{
+  "name": "kafka_demo",
+  "version": "1.0.0",
+  "description": "basic demo of instanciating in zookeeper/kafka in docker and creating producers and consumers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kafkajs": "^2.2.0"
+  }
+}
