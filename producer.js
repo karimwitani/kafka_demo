@@ -1,4 +1,5 @@
 const { Kafka } = require("kafkajs");
+const { Partitioners } = require('kafkajs')
 
 const msg = process.argv[2];
 
@@ -17,7 +18,9 @@ async function run() {
         })
 
         //You need the producer interface to create broker.
-        const producer = kafka.producer();
+        const producer = kafka.producer({
+            createPartitioner: Partitioners.LegacyPartitioner
+        });
 
         //You connect to you broker, which returns a promise (so you await)
         console.log("I'm connecting ....");
@@ -27,7 +30,7 @@ async function run() {
         //You create your producer.
         const partition = msg[0] < "N" ? 0 : 1;
         const result = await producer.send({
-            "topic": "Users",
+            "topic": "uSr",
             "messages": [
                 {
                     "value": msg,
@@ -36,7 +39,7 @@ async function run() {
             ]
         });
 
-        console.log(`Sent message ${msg} succesfully ${result}`);
+        console.log(`Sent message ${msg} succesfully ${JSON.stringify(result)}`);
         await producer.disconnect();
     }
     catch (ex) {

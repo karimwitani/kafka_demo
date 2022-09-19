@@ -25,7 +25,7 @@ async function run() {
 
         //You create your producer.
         await consumer.subscribe({
-            "topic": "Users",
+            "topic": "uSr",
             "fromBeginning": true
         });
 
