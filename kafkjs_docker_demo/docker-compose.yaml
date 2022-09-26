@@ -6,7 +6,7 @@ services:
     container_name: zookeeper
     hostname: zookeeper
     volumes:
-      - /Users/karimitani/Documents/github/kafka_demo_hussein_nasser/volumes/zookeper-persistence:/bitnami/zookeeper
+      - ./volumes/zookeper-persistence:/bitnami/zookeeper
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
@@ -21,7 +21,7 @@ services:
     ports:
       - '9092:9092'
     volumes:
-      - /Users/karimitani/Documents/github/kafka_demo_hussein_nasser/volumes/kafka-persistence:/bitnami/kafka
+      - ./volumes/kafka-persistence:/bitnami/kafka
     networks:
       - kafka-network
     environment:
