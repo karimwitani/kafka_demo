@@ -2,7 +2,6 @@
 This KB is intended to introduce the reader to the fundamental concepts of Kafka. Included in the Repo are a few demos on running kafka clusters as well as references pulled from various usefull articles found on the web.
 
 # Table of contents
-- [Kafka Knowledge Base](#kafka-knowledge-base)
 - [Demos](#demos)
 - [References](#references)
   - [Articles](#articles)
