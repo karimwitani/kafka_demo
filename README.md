@@ -53,8 +53,8 @@ This KB is intended to introduce the reader to the fundamental concepts of Kafka
 * Cluster Controllers :  A designated broker in a kafka cluster that reads/writes metadata to/from Zookeper and is responsible for assigning leadership across the brokers for each partition.
 * Clusters : A collection of kafka brokers.
 * Consumer Groups : A collection of consumers that are assigned to reading the same topic, they are assigned the same group-id. Kafka ensures that each partition of a topic is consumed by only one member of the group, a message is only read once by a single member of a consumer group.   
-![](https://miro.medium.com/max/640/1*J-0xbraSo0fbyrrPCXedlg.png)  ![](https://miro.medium.com/max/640/1*J-0xbraSo0fbyrrPCXedlg.png)
-This process allows parallel consumption of a topic, enabling higher throughput, however the maximum benefit is limited to the number of partitions on a topic. You can have more consumers than partitions on a topics (N+1) where a consumer is idle to implement a hot failover (in case a consumer fails another is ready to take its place)
+![](https://miro.medium.com/max/640/1*J-0xbraSo0fbyrrPCXedlg.png)  ![](https://miro.medium.com/max/640/1*J-0xbraSo0fbyrrPCXedlg.png)  
+This process allows parallel consumption of a topic, enabling higher throughput, however the maximum benefit is limited to the number of partitions on a topic. You can have more consumers than partitions on a topics (N+1) where a consumer is idle to implement a hot failover (in case a consumer fails another is ready to take its place)  
 ![](https://miro.medium.com/max/640/1*u9fycPZCrnr80fS-mhTX4w.png)
 * Disk Based Retention :
 * ETL / CDC :
@@ -66,7 +66,8 @@ happened in a system as an array of bytes.
 * Offsets: sequential identifiers that are unique to each record in the partition. When a new record is written to the end of the log file (partition )it is assigned a new offset that is incremented. They are useful for consumers who need to know where to pick up from the last time they read from the partition. Messages within the partition are always ordered but there is no guarantee of ordering ACROSS partitions
 ![](https://miro.medium.com/max/720/1*UEjzjKWxqduWnOpIzC34Ow.png)  
 ![](https://miro.medium.com/max/640/1*qlXZaR453wKWBqSl-JQFvQ.png)  
-* Partition : Partitions of topics hold a subset of records owned by a topic. Each partition is single log file that holds records in an append only fashions ![](https://miro.medium.com/max/640/1*JFfNA2FUsF3iek2lHAZlEA.png).   
+* Partition : Partitions of topics hold a subset of records owned by a topic. Each partition is single log file that holds records in an append only fashion  
+![](https://miro.medium.com/max/640/1*JFfNA2FUsF3iek2lHAZlEA.png).   
 A rough formula for determining the number of partitions needed is max(t/p ,t/c) where t is target throughput, p is producer throughput (on a single partition) and c is consumer throughput (on a single partition). One has to decide on a trade off between speed and reliability when it come to the number of partitions on a broker as in the case of failure, having too many partitions on a broker will slow down the process of electing a new partition leader (which are the only ones that can be written to from the producers)
 Partition keys: The key that indicates which partition a message will be written to. When producers send a message to a topic they use information from the application context to derive a key, using a hash function, this could be a userID or a deviceID. If the input that decides the partition key is not well distributed (1 clientID generating a disproportionate amount of records), a solution would be to let kafka decide the partition assignment using round robin.  
 ![](https://miro.medium.com/max/720/1*UVEPQaFJhu9yu1mJW8r60w.png)   
@@ -76,4 +77,5 @@ Using hashed keys may be necessary if you need messages coming from the same use
 * Retention Policy :
 * Scalability : Kafka distributes partitions across its cluster’s brokers which leads to higher throughput, a topic can be read by multiple consumers concurrently because they don’t all have to read from the same partition. 
 * Streams : Streams are related events that flow in sequence.
-* Topics : Topics group related events and store them. They are similar to tables in databases and folders in file systems. In * Kafka they are used to decouple the producers and consumers of data. Producers will "POST" while consumers will "GET" from a topic without having to be directly connected between themselves, they reach out to the kafka brokers (specifically the leaders of a topic) for such ends ![](https://miro.medium.com/max/1400/1*APGq98CaniHGoDvfjgbVaA.png)
+* Topics : Topics group related events and store them. They are similar to tables in databases and folders in file systems. In * Kafka they are used to decouple the producers and consumers of data. Producers will "POST" while consumers will "GET" from a topic without having to be directly connected between themselves, they reach out to the kafka brokers (specifically the leaders of a topic) for such ends   
+![](https://miro.medium.com/max/1400/1*APGq98CaniHGoDvfjgbVaA.png)
