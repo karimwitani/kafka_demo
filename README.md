@@ -15,7 +15,7 @@ This KB is intended to introduce the reader to the fundamental concepts of Kafka
 
 [Docker + Kafkajs (Node) demo](kafkjs_docker_demo)
 
-[Docker multi network demo (Coming Soon)]()
+[Docker multi network demo (Coming Soon)](#kafka-knowledge-base)
 
 # References
 ## Articles
